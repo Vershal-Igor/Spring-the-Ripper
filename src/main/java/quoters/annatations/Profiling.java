@@ -1,4 +1,4 @@
-package quoters;
+package quoters.annatations;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

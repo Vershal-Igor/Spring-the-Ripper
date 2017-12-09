@@ -5,9 +5,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config/>
-    <bean class="quoters.ProfilingHandlerBeanPostProcessor"/>
-    <bean class="quoters.InjectRandomIntAnnotationBeanPostProcessor"/>
-    <bean id="terminatorQuoter" class="quoters.TerminatorQuoter">
+    <bean class="quoters.banpostprocessors.PostProxyInvokerContextListener"/>
+    <bean class="quoters.banpostprocessors.ProfilingHandlerBeanPostProcessor"/>
+    <bean class="quoters.banpostprocessors.InjectRandomIntAnnotationBeanPostProcessor"/>
+    <bean id="terminatorQuoter" class="quoters.model.TerminatorQuoter">
         <property name="message" value="I'll be back"/>
     </bean>
 </beans>

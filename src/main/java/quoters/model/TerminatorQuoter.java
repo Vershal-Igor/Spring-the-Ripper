@@ -1,7 +1,12 @@
-package quoters;
+package quoters.model;
 
+
+import quoters.annatations.InjectRandomInt;
+import quoters.annatations.PostProxy;
+import quoters.annatations.Profiling;
 
 import javax.annotation.PostConstruct;
+
 @Profiling
 public class TerminatorQuoter implements Quoter {
     @InjectRandomInt(min = 2, max = 7)
@@ -10,19 +15,21 @@ public class TerminatorQuoter implements Quoter {
 
     @PostConstruct
     public void init() {
-        System.out.println("Phase#2");
+        System.out.println("Phase#2" + "init method @PostConstruct");
         System.out.println(repeat);
     }
 
     public TerminatorQuoter() {
-        System.out.println("Phase#1");
+        System.out.println("Phase#1" + "the plain constructor");
     }
 
     public void setMessage(String message) {
         this.message = message;
     }
 
+    @PostProxy
     public void sayQuote() {
+        System.out.println("Phase#3");
         for (int i = 0; i < repeat; i++) {
             System.out.println("message = " + message);
         }

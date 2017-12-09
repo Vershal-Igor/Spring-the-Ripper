@@ -1,8 +1,9 @@
-package quoters;
+package quoters.banpostprocessors;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.util.ReflectionUtils;
+import quoters.annatations.InjectRandomInt;
 
 import java.lang.reflect.Field;
 import java.util.Random;

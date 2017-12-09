@@ -1,4 +1,4 @@
-package quoters;
+package quoters.model;
 
 
 public interface Quoter {
