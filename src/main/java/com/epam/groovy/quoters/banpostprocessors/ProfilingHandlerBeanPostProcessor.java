@@ -34,20 +34,18 @@ public class ProfilingHandlerBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessAfterInitialization(final Object bean, String beanName) throws BeansException {
         Class beanClass = map.get(beanName);
         if (beanClass != null) {
-            return Proxy.newProxyInstance(beanClass.getClassLoader(), beanClass.getInterfaces(), new InvocationHandler() {
-                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                    if (controller.isEnabled()) {
-                        System.out.println("Профилирую...");
-                        long before = System.nanoTime();
-                        Object retVal = method.invoke(bean, args);
-                        long after = System.nanoTime();
-                        long reesult = after - before;
-                        System.out.println("reesult = " + reesult);
-                        System.out.println("Всё");
-                        return retVal;
-                    } else {
-                        return method.invoke(bean, args);
-                    }
+            return Proxy.newProxyInstance(beanClass.getClassLoader(), beanClass.getInterfaces(), (proxy, method, args) -> {
+                if (controller.isEnabled()) {
+                    System.out.println("Профилирую...");
+                    long before = System.nanoTime();
+                    Object retVal = method.invoke(bean, args);
+                    long after = System.nanoTime();
+                    long reesult = after - before;
+                    System.out.println("reesult = " + reesult);
+                    System.out.println("Всё");
+                    return retVal;
+                } else {
+                    return method.invoke(bean, args);
                 }
             });//создаёт объект из нового класса который сгенерит сам же на лету
         }
